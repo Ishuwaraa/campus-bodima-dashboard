@@ -38,6 +38,9 @@ const Navbar = () => {
 
             <ul className=' hidden md:flex flex-grow justify-evenly mx-16 lg:px-32 text-cusGray'>
             <li><a href="/" className=' hover:text-primary'>Home</a></li>
+            <li><a href="/" className=' hover:text-primary'>Users</a></li>
+            <li><a href="/register" className=' hover:text-primary'>User registration</a></li>
+            <li><a href="/" className=' hover:text-primary'>Profile</a></li>
             {/* <li><a href="/map" className=' hover:text-primary'>Map</a></li>
             <li><a href="/postAd" className=' hover:text-primary'>Post Ad</a></li>
             <li><a href="/#about-us" className=' hover:text-primary'>About Us</a></li>
