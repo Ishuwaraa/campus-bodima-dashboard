@@ -89,13 +89,15 @@ const AdApproval = () => {
     const onSubmit = async () => {
         const formData = {
             status : 'approved',
-            emailMsg
+            emailMsg,
+            emailSubject: `Your ad '${adDetails.title}' is now live`
         }
 
         try{
             setLoading(true);
             const response = await axiosPrivate.patch(`/api/admin/update-ad/${adId}`, formData);
             setLoading(false);
+            setValue('emailMsg', '');
             fetchData();
             notify('Status updated and email sent successfully.');
         } catch (err) {
@@ -124,7 +126,8 @@ const AdApproval = () => {
 
         const formData = {
             status : 'denied',
-            emailMsg
+            emailMsg,
+            emailSubject: `Your ad '${adDetails.title}' has been denied`
         }
 
         try{
@@ -132,6 +135,7 @@ const AdApproval = () => {
             const response = await axiosPrivate.patch(`/api/admin/update-ad/${adId}`, formData);
             setLoading(false);
             fetchData();
+            setValue('emailMsg', '');
             notify('Status updated and email sent successfully.');
         } catch (err) {
             setLoading(false);
@@ -150,6 +154,42 @@ const AdApproval = () => {
             else {
                 console.log(err.message);
                 setErrMessage(err.message);
+            }
+        }
+    }
+
+    const deleteAd = async (e) => {
+        e.preventDefault();
+        if(emailMsg === '') {
+            errorNotify('Email content is required');
+            return;
+        }
+
+        if(window.confirm('Are you sure you want to delete this ad?')) {
+            try{
+                setLoading(true);
+                const response = await axiosPrivate.post(`/api/admin/delete-ad/${adId}`, { emailMsg });
+                notify(response.data.msg);
+                navigate('/', { replace: true });
+                setLoading(false);
+            } catch (err) {
+                setLoading(false);
+                if(err.response.status === 401) {
+                    //no refresh token
+                    console.log(err.response.data.msg);
+                    localStorage.removeItem('auth');
+                    errorNotify('Your session has expired. Please log in again to continue.')
+                    navigate('/login', {  replace: true });
+                }
+                else if(err.response.status === 403) console.log(err.response.data.error);
+                else if(err.response.status === 404) {
+                    console.log(err.response.data.msg);
+                    setErrMessage(err.response.data.msg);
+                }
+                else {
+                    console.log(err.message);
+                    setErrMessage(err.message);
+                }
             }
         }
     }
@@ -274,7 +314,8 @@ const AdApproval = () => {
                     </div> 
 
                     <div className=" flex justify-between md:mx-20 lg:mx-48">
-                        <button onClick={(e) => denyApprove(e)} className="btn bg-red-500">DENY APPROVAL</button>
+                        <button onClick={(e) => deleteAd(e)} className="btn bg-red-500">DELETE AD</button>
+                        <button onClick={(e) => denyApprove(e)} className="btn bg-cusGray">DENY APPROVAL</button>
                         <button className="btn bg-secondary">APPROVE</button>
                     </div>
                 </form>

@@ -10,6 +10,9 @@ const Home = () => {
 
     const [loading, setLoading] = useState(false);
     const [ads, setAds] = useState([]);
+    const [approvedAds, setApprovedAds] = useState([]);
+    const [deniedAds, setDeniedAds] = useState([]);
+    const [pendingAds, setPendingAds] = useState([]);
     const [errMessage, setErrMessage] = useState(null);
     const [sortBy, setSortBy] = useState('');
 
@@ -17,13 +20,12 @@ const Home = () => {
         const fetchAds = async () => {
             try{
                 setLoading(true);
-                const response = await axiosPrivate.get('/api/admin/all-ads');
-
-                const adsWithImages = response.data.ads.map((ad, index) => ({
+                const response = await axiosPrivate.get('/api/admin/all-ads');                
+                                
+                setAds(response.data.ads.map((ad, index) => ({
                     ...ad,
                     imageUrl: response.data.imageUrls[index]
-                }));
-                setAds(adsWithImages);
+                })));
                 setLoading(false);
                 setErrMessage(false);
             } catch(err) {
@@ -35,6 +37,17 @@ const Home = () => {
 
         fetchAds();
     }, [])
+
+    const displayApproved = () => setApprovedAds(ads.filter((ad) => ad.status === 'approved'))
+    const displayDenied = () => setDeniedAds(ads.filter((ad) => ad.status === 'denied'))
+    const displayPending = () => setPendingAds(ads.filter((ad) => ad.status === 'pending'))
+
+    const dropDownOnChange = (e) => {
+        setSortBy(e.target.value);
+        displayApproved();
+        displayDenied();
+        displayPending();
+    }
 
     return ( 
         <div>
@@ -59,7 +72,7 @@ const Home = () => {
                     <div>
                         <div className=" mt-14 lg:mt-20 mb-10 flex justify-between">
                             <p className="text-2xl md:text-4xl text-primary font-bold">All Ads</p>
-                            <select name="sort" value={sortBy} onChange={(e) => setSortBy(e.target.value)} className=" p-1 border border-cusGray rounded-lg">
+                            <select name="sort" value={sortBy} onChange={(e) => dropDownOnChange(e)} className=" p-1 border border-cusGray rounded-lg">
                                 <option value="" className=" text-gray-500">Sort by</option>
                                 <option value="approved" >Approved ads</option>
                                 <option value="pending" >Pending ads</option>
@@ -70,17 +83,55 @@ const Home = () => {
                         <div className="flex justify-center">
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                             {ads.length > 0 && 
-                                ads.map((ad, index) => (
-                                    <a href={`/ad-approve?id=${ad._id}`} key={index}>
-                                        <AdDetail 
-                                            image={ad.imageUrl} 
-                                            title={ad.title} 
-                                            location={ad.location}
-                                            price={ad.price}
-                                            rate={ad.rating}                  
-                                        />
-                                    </a> 
-                                ))
+                                sortBy === 'approved'? (
+                                    approvedAds.map((ad, index) => (
+                                        <a href={`/ad-approve?id=${ad._id}`} key={index}>
+                                            <AdDetail 
+                                                image={ad.imageUrl} 
+                                                title={ad.title} 
+                                                location={ad.location}
+                                                price={ad.price}
+                                                rate={ad.rating}                  
+                                            />
+                                        </a> 
+                                    ))
+                                ) : sortBy === 'denied' ? (
+                                    deniedAds.map((ad, index) => (
+                                        <a href={`/ad-approve?id=${ad._id}`} key={index}>
+                                            <AdDetail 
+                                                image={ad.imageUrl} 
+                                                title={ad.title} 
+                                                location={ad.location}
+                                                price={ad.price}
+                                                rate={ad.rating}                  
+                                            />
+                                        </a> 
+                                    ))
+                                ) : sortBy === 'pending' ? (
+                                    pendingAds.map((ad, index) => (
+                                        <a href={`/ad-approve?id=${ad._id}`} key={index}>
+                                            <AdDetail 
+                                                image={ad.imageUrl} 
+                                                title={ad.title} 
+                                                location={ad.location}
+                                                price={ad.price}
+                                                rate={ad.rating}                  
+                                            />
+                                        </a> 
+                                    ))
+                                ) : (
+                                    ads.map((ad, index) => (
+                                        <a href={`/ad-approve?id=${ad._id}`} key={index}>
+                                            <AdDetail 
+                                                image={ad.imageUrl} 
+                                                title={ad.title} 
+                                                location={ad.location}
+                                                price={ad.price}
+                                                rate={ad.rating}                  
+                                            />
+                                        </a> 
+                                    ))
+                                )
                             }
                             </div>
                         </div>
