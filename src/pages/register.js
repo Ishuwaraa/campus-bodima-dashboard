@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import LoginSideView from '../components/LoginSideView';
 import { useForm } from 'react-hook-form';
-import axios from '../api/axios';
-import useAuth from "../hooks/useAuth";
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { useNavigate } from "react-router-dom";
+import { notify } from '../toastify/notifi';
 
 const Register = () => {
-    const { setAuth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
 
     const [errMessage, setErrMessage] = useState(null);
@@ -26,15 +26,14 @@ const Register = () => {
 
         const formData = { name, email, contact, password };
         try{
-            const response = await axios.post('/api/user/register', formData, { withCredentials: true });
-            const accessToken = response.data.accessToken;
-            setAuth({ accessToken });
+            const response = await axiosPrivate.post('/api/admin/register', formData, { withCredentials: true });            
             setValue('name', '');
             setValue('email', '');
             setValue('contact', '');
             setValue('password', '');
+            setValue('conPass', '');
+            notify('Account successfully created');
             setErrMessage(null);
-            // navigate('/');
         } catch (err) {
             if(err.response.status === 400) {
                 setErrMessage(err.response.data.msg);

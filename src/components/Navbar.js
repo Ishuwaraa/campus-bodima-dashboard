@@ -37,14 +37,10 @@ const Navbar = () => {
             </div>
 
             <ul className=' hidden md:flex flex-grow justify-evenly mx-16 lg:px-32 text-cusGray'>
-            <li><a href="/" className=' hover:text-primary'>Home</a></li>
-            <li><a href="/" className=' hover:text-primary'>Users</a></li>
+            <li><a href="/" className=' hover:text-primary'>Ads</a></li>
+            <li><a href="/users" className=' hover:text-primary'>Users</a></li>
             <li><a href="/register" className=' hover:text-primary'>User registration</a></li>
-            <li><a href="/" className=' hover:text-primary'>Profile</a></li>
-            {/* <li><a href="/map" className=' hover:text-primary'>Map</a></li>
-            <li><a href="/postAd" className=' hover:text-primary'>Post Ad</a></li>
-            <li><a href="/#about-us" className=' hover:text-primary'>About Us</a></li>
-            {auth?.accessToken && <li><a href="/profile" className=' hover:text-primary'>Profile</a></li>} */}
+            <li><a href="/profile" className=' hover:text-primary'>Profile</a></li>
             </ul>
 
             <div className=' mx-10 block md:hidden' onClick={toggleBurgerIcon}>
@@ -68,11 +64,10 @@ const Navbar = () => {
             {menuVisible && (
             <div className={`absolute top-14 left-0 w-full bg-white border border-b-gray-200  pb-4 md:hidden transition-all duration-300 ease-in-out ${menuVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                 <ul className='flex flex-col items-center space-y-4 py-4 text-cusGray'>
-                <li><a href="/" className='block w-full text-center'>Home</a></li>
-                {/* <li><a href="/map" className='block w-full text-center'>Map</a></li>
-                <li><a href="/postAd" className='block w-full text-center'>Post Ad</a></li>
-                <li><a href="/#about-us" className='block w-full text-center'>About Us</a></li>
-                {auth?.accessToken && <li><a href="/profile" className='block w-full text-center'>Profile</a></li>} */}
+                <li><a href="/" className='block w-full text-center'>Ads</a></li>
+                <li><a href="/users" className='block w-full text-center'>Users</a></li>
+                <li><a href="/register" className='block w-full text-center'>User registration</a></li>
+                <li><a href="/profile" className='block w-full text-center'>Profile</a></li>
                 </ul>
                 <div className=' flex justify-center'>
                     {auth?.accessToken ? (

@@ -306,14 +306,14 @@ const AdApproval = () => {
                 )}
 
                 <form action="" onSubmit={handleSubmit(onSubmit)}>
-                    <div className=" lg:px-20 mb-3">
+                    <div className=" lg:px-20 mb-10 md:mb-5">
                         <p className=' mt-3 mb-1 w-full text-secondary font-semibold text-xl'>Email content</p>
                         <textarea name="emailMsg" rows='4' required className=" p-2 w-full border border-cusGray rounded-lg" placeholder="type what to send to the client" 
                         {...register('emailMsg', {maxLength: 300, pattern: /^[a-zA-Z0-9\s\.,_&@'"?!\-]+$/i })}/>
                         {errors.emailMsg && errors.emailMsg.type === 'maxLength' ? <span className=' text-sm text-red-600'>max character limit is 300</span> : errors.emailMsg && <span className=' text-sm text-red-600'>description must contain only letters, numbers, and characters(@ & ' " _ - , . ? !)</span>}                            
                     </div> 
 
-                    <div className=" flex justify-between md:mx-20 lg:mx-48">
+                    <div className=" flex flex-col md:flex-row gap-y-6 md:gap-y-0 justify-between md:mx-20 lg:mx-48">
                         <button onClick={(e) => deleteAd(e)} className="btn bg-red-500">DELETE AD</button>
                         <button onClick={(e) => denyApprove(e)} className="btn bg-cusGray">DENY APPROVAL</button>
                         <button className="btn bg-secondary">APPROVE</button>
