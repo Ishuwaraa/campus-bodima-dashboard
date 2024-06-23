@@ -9,6 +9,7 @@ import Users from './pages/users';
 import Profile from './pages/profile';
 import ForgotPass from './pages/forgotPass';
 import ResetPass from './pages/resetPass';
+import ErrorPage from './pages/404';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           <Route path='/profile' element={<PrivateRoute element={<Profile />} />} />
           <Route path='/forgot-password' element={<ForgotPass />} />
           <Route path='/reset-password' element={<ResetPass />} />
+
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
