@@ -10,6 +10,7 @@ import Profile from './pages/profile';
 import ForgotPass from './pages/forgotPass';
 import ResetPass from './pages/resetPass';
 import ErrorPage from './pages/404';
+import Feedback from './pages/feedback';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/ad-approve' element={<PrivateRoute element={<AdApproval />} />} />
           <Route path='/users' element={<PrivateRoute element={<Users />} />} />
           <Route path='/profile' element={<PrivateRoute element={<Profile />} />} />
+          <Route path='/feedback' element={<PrivateRoute element={<Feedback />} />} />
           <Route path='/forgot-password' element={<ForgotPass />} />
           <Route path='/reset-password' element={<ResetPass />} />
 

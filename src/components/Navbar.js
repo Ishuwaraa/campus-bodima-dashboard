@@ -36,10 +36,11 @@ const Navbar = () => {
             <a href="/"><img className=' w-30 h-20' src={logoDark} alt="campus bodima" /></a>
             </div>
 
-            <ul className=' hidden md:flex flex-grow justify-evenly mx-16 lg:px-32 text-cusGray'>
+            <ul className=' hidden md:flex flex-grow justify-evenly mx-16 lg:px-28 text-cusGray'>
             <li><a href="/" className=' hover:text-primary'>Ads</a></li>
             <li><a href="/users" className=' hover:text-primary'>Users</a></li>
-            <li><a href="/register" className=' hover:text-primary'>User registration</a></li>
+            <li><a href="/feedback" className=' hover:text-primary'>Feedbacks</a></li>
+            <li><a href="/register" className=' hover:text-primary'>Admin registration</a></li>
             <li><a href="/profile" className=' hover:text-primary'>Profile</a></li>
             </ul>
 
@@ -66,7 +67,8 @@ const Navbar = () => {
                 <ul className='flex flex-col items-center space-y-4 py-4 text-cusGray'>
                 <li><a href="/" className='block w-full text-center'>Ads</a></li>
                 <li><a href="/users" className='block w-full text-center'>Users</a></li>
-                <li><a href="/register" className='block w-full text-center'>User registration</a></li>
+                <li><a href="/feedback" className=' block w-full text-center'>Feedbacks</a></li>
+                <li><a href="/register" className='block w-full text-center'>Admin registration</a></li>
                 <li><a href="/profile" className='block w-full text-center'>Profile</a></li>
                 </ul>
                 <div className=' flex justify-center'>
