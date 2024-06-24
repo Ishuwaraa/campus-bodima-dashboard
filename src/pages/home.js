@@ -68,7 +68,7 @@ const Home = () => {
                     <div className=" flex justify-center">
                         <p className=" text-cusGray text-lg">{errMessage}</p>
                     </div>
-                ) : (
+                ) : ads.length > 0 ? (
                     <div>
                         <div className=" mt-14 lg:mt-20 mb-10 flex justify-between">
                             <p className="text-2xl md:text-4xl text-primary font-bold">All Ads</p>
@@ -82,7 +82,7 @@ const Home = () => {
 
                         <div className="flex justify-center">
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                            {ads.length > 0 && 
+                            {
                                 sortBy === 'approved'? (
                                     approvedAds.map((ad, index) => (
                                         <a href={`/ad-approve?id=${ad._id}`} key={index}>
@@ -135,6 +135,10 @@ const Home = () => {
                             }
                             </div>
                         </div>
+                    </div>
+                ) : (
+                    <div className=" flex justify-center">
+                        <p className=" text-cusGray text-lg">No ads to display yet</p>
                     </div>
                 )}                
             </div>

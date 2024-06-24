@@ -11,7 +11,7 @@ const ForgotPass = () => {
 
     const [errMessage, setErrMessage] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
 
     const email = watch('email');
 

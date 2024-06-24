@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../components/Loading";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
-import { notify, errorNotify, deleteNotify } from '../toastify/notifi';
+import { notify, errorNotify } from '../toastify/notifi';
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -31,7 +31,7 @@ const Profile = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
-    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
 
     //edit form
     const editName = watch('editName');
@@ -69,7 +69,7 @@ const Profile = () => {
                 errorNotify('Your session has expired. Please log in again to continue.')
                 navigate('/login', { state: { from: location }, replace: true });
             }
-            else if(err.response.status === 403) console.log(err.response.data.error);
+            else if(err.response.status === 403) console.log(err.response.data.msg);
             else if(err.response.status === 404) console.log(err.response.data.msg);
             else {
                 console.log(err.message);

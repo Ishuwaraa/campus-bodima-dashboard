@@ -7,7 +7,7 @@ import shower from '../assets/ad/shower.png'
 import Phone from "../assets/ad/phone.png";
 import Footer from "../components/Footer";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { notify, errorNotify } from '../toastify/notifi';
@@ -18,7 +18,7 @@ import Loading from "../components/Loading";
 const AdApproval = () => {
     const axiosPrivate = useAxiosPrivate();
 
-    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
     const emailMsg = watch("emailMsg");  
 
     const [adDetails, setAdDetails] = useState([]);
@@ -109,7 +109,7 @@ const AdApproval = () => {
                 errorNotify('Your session has expired. Please log in again to continue.')
                 navigate('/login', {  replace: true });
             }
-            else if(err.response.status === 403) console.log(err.response.data.error);
+            else if(err.response.status === 403) console.log(err.response.data.msg);
             else if(err.response.status === 404) {
                 console.log(err.response.data.msg);
                 setErrMessage(err.response.data.msg);
@@ -146,7 +146,7 @@ const AdApproval = () => {
                 errorNotify('Your session has expired. Please log in again to continue.')
                 navigate('/login', {  replace: true });
             }
-            else if(err.response.status === 403) console.log(err.response.data.error);
+            else if(err.response.status === 403) console.log(err.response.data.msg);
             else if(err.response.status === 404) {
                 console.log(err.response.data.msg);
                 setErrMessage(err.response.data.msg);
@@ -181,7 +181,7 @@ const AdApproval = () => {
                     errorNotify('Your session has expired. Please log in again to continue.')
                     navigate('/login', {  replace: true });
                 }
-                else if(err.response.status === 403) console.log(err.response.data.error);
+                else if(err.response.status === 403) console.log(err.response.data.msg);
                 else if(err.response.status === 404) {
                     console.log(err.response.data.msg);
                     setErrMessage(err.response.data.msg);

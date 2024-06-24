@@ -12,7 +12,7 @@ const ResetPass = () => {
     const token = searchParams.get('token');
     
     const [errMessage, setErrMessage] = useState(null);
-    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
 
     const password = watch('password');
     const conPass = watch('conPass');
@@ -75,7 +75,7 @@ const ResetPass = () => {
 
                         {errMessage && <p className=" mt-1 text-sm text-red-600">{errMessage}</p>}
                         <div className=' flex justify-center mt-8'>
-                            <button className='btn bg-primary'>Reset password</button>
+                            <button className='btn bg-primary'>Reset Password</button>
                         </div>
                     </form>
                 </div>

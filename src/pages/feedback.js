@@ -26,8 +26,8 @@ const Feedback = () => {
                     errorNotify('Your session has expired. Please log in again to continue.')
                     navigate('/login', {  replace: true });
                 } else if(err.response.status === 403) {
-                    console.log(err.response.data.error);
-                    setErrMessage(err.response.data.error);
+                    console.log(err.response.data.msg);
+                    setErrMessage(err.response.data.msg);
                 } else {
                     console.log(err.message);
                     setErrMessage(err.message);

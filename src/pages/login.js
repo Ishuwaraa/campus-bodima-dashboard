@@ -12,7 +12,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
     
     const [errMessage, setErrMessage] = useState(null);
-    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
 
     const email = watch('email');
     const password = watch('password');    
@@ -63,7 +63,7 @@ const Login = () => {
                         errors.password && <span className=' text-sm text-red-600'>password must contain only letters, numbers, @, _, and -'</span>}
                         
                         {errMessage && <p className=" mt-1 text-sm text-red-600">{errMessage}</p>}
-                        <p className=" mt-3 text-sm text-cusGray">Forgot password?<a href="/forgot-password" className=" text-primary hover:underline ml-3">Reset here</a></p>                                                                        
+                        <p className=" mt-3 text-sm text-cusGray">Forgot your password?<a href="/forgot-password" className=" text-primary hover:underline ml-3">Reset here</a></p>                                                                        
 
                         <div className=' flex justify-center mt-8'>
                             <button className='btn bg-primary'>Log in</button>
